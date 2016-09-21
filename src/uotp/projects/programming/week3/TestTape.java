@@ -1,8 +1,7 @@
-package turing;
+package uotp.projects.programming.week3;
 
 // A test program for the Tape class that calls most of the methods in that class.
 
-import uotp.projects.programming.week3.Tape;
 
 //
 // The output from this program should be:  Tape Conents:  Hello World

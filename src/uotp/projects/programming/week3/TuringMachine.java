@@ -1,4 +1,4 @@
-package turing;
+package uotp.projects.programming.week3;
 
 import java.util.ArrayList;
 
@@ -73,13 +73,15 @@ public class TuringMachine {
 						+ tape.getTapeContents());
 			currentState = applicableRule.newState;
 			tape.setContent(applicableRule.newContent);
-			if (applicableRule.moveLeft)
-				tape.moveLeft();
-			else
-				tape.moveRight();
-//			System.out.println(applicableRule.currentState + " "+ applicableRule.currentContent 
+			if (!applicableRule.moveLeft)
+                            tape.moveRight();
+                        
+//			System.out.println(applicableRule.currentState + " "+ applicableRule.currentContent
 //					+ " " +applicableRule.newState + " " +applicableRule.newContent 
 //					+ " " +applicableRule.moveLeft);  // for testing.
+                        
+                        else
+				tape.moveLeft();
 		}
 		return tape.getTapeContents();
 	}	

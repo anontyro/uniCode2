@@ -1,4 +1,4 @@
-package turing;
+package uotp.projects.programming.week3;
 
 
 // A test program for the TuringMachine class.  It creates three machines

@@ -1,4 +1,4 @@
-package turing;
+package uotp.projects.programming.week3;
 
 
 /**
