@@ -14,60 +14,82 @@ public class TapeDouble {
     private Cell leftCell;
     private Cell activeCell;
     private Cell rightCell;
+    private int size;
 
     public TapeDouble() {
         activeCell = new Cell();
+        activeCell.next = rightCell;
+        activeCell.prev = leftCell;
+        size = 0;
     }
-
-    public Cell getCurrentCell() {
-
-        return activeCell;
+    
+    public int size(){
+        return size;
     }
-
-    public char getContent() {
-
-        return activeCell.content;
+    
+    public boolean isEmpty(){
+        return size==0;
     }
-
-    public void setContent(char ch) {
+    
+    public void moveRight(){
+        Cell tmp = new Cell();
+        if(rightCell != null){
+            rightCell.prev = tmp;
+        }
+        rightCell = tmp;
+        activeCell = tmp;
+        if(leftCell == null){
+            leftCell = tmp;
+        }
+        size++;
+        
+    }
+    
+    public void moveLeft(){
+        Cell tmp = new Cell();
+        if(leftCell != null){
+            leftCell.next = tmp;
+        }
+        leftCell = tmp;
+        activeCell = tmp;
+        if(rightCell == null){
+            rightCell = tmp;
+        }
+        size++;
+    }
+    
+    public void setContent(char ch){
         activeCell.content = ch;
         System.out.println(activeCell.content);
     }
-
-    public void moveLeft() {
-        Cell newCell = new Cell();
-        if(activeCell.prev == null){
-            leftCell = newCell;
-        }
-        else{
-            leftCell.prev = newCell;
-            newCell.prev = rightCell;
-        }
-        activeCell = newCell; 
+    
+    public char getContent(){
+        return activeCell.content;
     }
-
-    public void moveRight() {
-        Cell newCell = new Cell();
-        if(activeCell.next == null){
-            rightCell = newCell;
+    
+    public String getTapeContents(){
+        String output="";
+        Cell tmp = rightCell;
+        while(tmp != null){
+            System.out.println(tmp.content);
+            output += tmp.content;
+            tmp = tmp.next;
         }
-        else{
-            rightCell.next = newCell;
-            newCell.prev = rightCell;
-        }
-        activeCell = newCell;
-    }
-
-    public String getTapeContents() {
-        String output = "";
-
-
         return output;
     }
+    
+
 
     public static void main(String[]args){
         TapeDouble tapeNew = new TapeDouble();
-        
+        tapeNew.setContent('A');
+        tapeNew.moveRight();
+        tapeNew.setContent('L');
+        tapeNew.moveRight();
+        tapeNew.setContent('E');
+        tapeNew.moveLeft();
+        System.out.println(tapeNew.size());
+        System.out.println("content is: " +tapeNew.getTapeContents());
     }
 
 }

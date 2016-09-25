@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package uotp.projects.programming.week3;
 
 import java.util.ArrayList;
@@ -42,9 +38,9 @@ public class Tape {
         } else {
             lastCell.next = prevCell;
             System.out.println(activeCell.content);
-            prevCell.prev = activeCell;
+            
         }
-
+        prevCell.prev = activeCell;
         activeCell = prevCell;
 
     }
@@ -56,9 +52,9 @@ public class Tape {
         } else {
             activeCell.prev = nextCell;
             System.out.println(activeCell.content);
-            nextCell.next = activeCell;
+            
         }
-
+        nextCell.next = activeCell;
         activeCell = nextCell;
 
     }
