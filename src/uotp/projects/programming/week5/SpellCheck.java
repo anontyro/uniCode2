@@ -62,22 +62,41 @@ public class SpellCheck {
     private TreeSet corrections(String user, HashSet dictionary) {
         TreeSet suggestions = new TreeSet();
         Iterator iter = dictionary.iterator();
-        int counter = 0;
+        String mostLike = "";
 
         while (iter.hasNext()) {
             String temp = iter.next().toString();
-            
-            //check to see i the user word is majorly different in length to the dictionary word
-            
-            //check through the word for so many hits
-            for(int i = 0; i < user.length(); i++){
-                for(int j = 0; j<temp.length(); j++){
-                    if(user.charAt(i)== temp.charAt(j)){
+
+            //check to see is the user word is majorly different in length to the dictionary word
+            //check through the word for hits
+            for (int i = 0; i < user.length(); i++) {
+                int counter = 0;
+                for (int j = 0; j < temp.length(); j++) {
+                    if (user.charAt(i) == temp.charAt(j)) {
                         counter++;
                     }
                 }
+                /*
+                 to add a tolarance for what words are returned
+                 this is to ensure not every word which matches one letter is returned
+                 */
+                int tolerance = 0;
+                if(user.length() == 3){
+                    tolerance = 2;
+                }
+                else if(user.length() == 2){
+                    tolerance = 1;
+                }
+                else{
+                    tolerance = user.length()-2;
+                }
+                if (counter >= tolerance) {
+                    if ((temp.length() - user.length()) < 2) {
+                        suggestions.add(temp);
+                    }
+
+                }
             }
-            
 
             if (iter.hasNext()) {
                 iter.next();
@@ -85,7 +104,7 @@ public class SpellCheck {
                 break;
             }
         }
-
+        System.out.println("Size of suggestions: "+suggestions.size()+"\n"+suggestions.toString());
         return suggestions;
     }
 
@@ -95,13 +114,14 @@ public class SpellCheck {
         Scanner input = new Scanner(System.in);
         System.out.println("Please enter word to search... ");
         userIn = input.nextLine();
+        userIn = userIn.replaceAll("[^a-zA-Z]", "");
 
         System.out.println(userIn);
         return userIn;
     }
 
     public static void main(String[] args) {
-        SpellCheck checker = new SpellCheck("./Words.txt");
+        SpellCheck checker = new SpellCheck("./words.txt");
 
     }
 }
