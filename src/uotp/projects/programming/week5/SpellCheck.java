@@ -6,7 +6,7 @@
 package uotp.projects.programming.week5;
 
 import java.io.*;
-import java.util.HashSet;
+import java.util.*;
 import java.util.Scanner;
 
 /**
@@ -25,6 +25,12 @@ public class SpellCheck {
         }
         System.out.println(dictionary.size() + "\n" 
                 +dictionary.toString());
+        
+        String value = userInput();
+        
+        if(dictionary.contains(value)){
+            System.out.println("The word was typed correctly: " +value);
+        }
     }
 
     private HashSet readTxt(String filename) throws IOException {
@@ -50,6 +56,11 @@ public class SpellCheck {
         }
 
         return dictionary;
+    }
+    
+    private TreeSet corrections(String user, HashSet dictionary){
+        
+        return null;
     }
     
     private String userInput(){

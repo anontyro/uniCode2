@@ -81,7 +81,7 @@ public class Recursive {
      is adjective OR
      believes that simpleSentence
     
-    control statement for the verbPhrase creation
+     control statement for the verbPhrase creation
      */
     private String verbPhrase() {
 
@@ -100,9 +100,9 @@ public class Recursive {
     }
 
     /*
-    wordSelector is a method that selected a random word from an array given
-    set input values and pulls them to be used in the String.
-    */
+     wordSelector is a method that selected a random word from an array given
+     set input values and pulls them to be used in the String.
+     */
     private String wordSelector(String type) {
         String selection = "";
 
@@ -132,6 +132,15 @@ public class Recursive {
         }
 
         return selection;
+
+    }
+    //equality stuff
+    public static boolean equality(String str1, String str2) {
+        return str1 == str2;
+    }
+
+    public static boolean equalityCheck(String str1, String str2) {
+        return str1.equals(str2);
     }
 
     //test class
@@ -139,6 +148,16 @@ public class Recursive {
 
         Recursive recurse = new Recursive();
         System.out.println(recurse.sentence());
+        
+        //equality stuff
+        String strg1 = new String ("new string");
+        String strg2 = new String ("new string");
+
+        System.out.println(strg1 + "\n" + strg2 + "\n");
+
+        System.out.println(Recursive.equality(strg1, strg2));
+        System.out.println(Recursive.equalityCheck(strg1, strg2));
+
     }
 
 }
