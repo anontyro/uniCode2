@@ -23,13 +23,14 @@ public class SpellCheck {
         } catch (IOException ex) {
             System.err.println("Error in parsing file try a new dir");
         }
-        System.out.println(dictionary.size() + "\n" 
-                +dictionary.toString());
-        
+        System.out.println(dictionary.size());
+
         String value = userInput();
-        
-        if(dictionary.contains(value)){
-            System.out.println("The word was typed correctly: " +value);
+
+        if (dictionary.contains(value)) {
+            System.out.println("The word was typed correctly: " + value);
+        } else {
+            corrections(value, dictionary);
         }
     }
 
@@ -57,25 +58,50 @@ public class SpellCheck {
 
         return dictionary;
     }
-    
-    private TreeSet corrections(String user, HashSet dictionary){
-        
-        return null;
+
+    private TreeSet corrections(String user, HashSet dictionary) {
+        TreeSet suggestions = new TreeSet();
+        Iterator iter = dictionary.iterator();
+        int counter = 0;
+
+        while (iter.hasNext()) {
+            String temp = iter.next().toString();
+            
+            //check to see i the user word is majorly different in length to the dictionary word
+            
+            //check through the word for so many hits
+            for(int i = 0; i < user.length(); i++){
+                for(int j = 0; j<temp.length(); j++){
+                    if(user.charAt(i)== temp.charAt(j)){
+                        counter++;
+                    }
+                }
+            }
+            
+
+            if (iter.hasNext()) {
+                iter.next();
+            } else {
+                break;
+            }
+        }
+
+        return suggestions;
     }
-    
-    private String userInput(){
+
+    private String userInput() {
         String userIn = "";
-        
+
         Scanner input = new Scanner(System.in);
         System.out.println("Please enter word to search... ");
         userIn = input.nextLine();
-        
+
         System.out.println(userIn);
         return userIn;
     }
-    
-    public static void main(String[]args){
+
+    public static void main(String[] args) {
         SpellCheck checker = new SpellCheck("./Words.txt");
-        
+
     }
 }
